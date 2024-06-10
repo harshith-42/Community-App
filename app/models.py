@@ -15,13 +15,13 @@ class Cohort(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True) # null ->can be empty, blank-> In form also
     # partcipants =
-    updated = models.DateTimeField(auto_now=True)
-    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True) # everytime I change, time is updated
+    created = models.DateTimeField(auto_now_add=True) # Only once the time is updated i.e when created
 
     class Meta:
-        ordering = ['-updated', '-created']
+        ordering = ['-updated', '-created'] # TO order the contents while displaying
     
     def __str__(self):
         return self.name

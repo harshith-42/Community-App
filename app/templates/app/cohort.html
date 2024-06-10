@@ -2,4 +2,20 @@
 
 {% block content %}
 <h1>{{cohort.name}}</h1>
-{% endblock content %}
+<p>{{cohort.description}}</p>
+
+<div class="comment-wrapper">
+    <h3>Conversations</h3>
+    <hr>
+
+    {% for message in cohort_messages %}
+    <div>
+        <small>@{{message.user}}  {{message.created|timesince}} ago</small>
+        <hr>
+        <p>{{message.body}}</p>
+    
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
