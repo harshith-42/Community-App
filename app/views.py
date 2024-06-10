@@ -6,7 +6,7 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cohort, Topic
+from .models import Cohort, Topic, Message
 from .forms import CohortForm
 
 
@@ -72,8 +72,19 @@ def home(request):
 def cohort(request, pk):
     cohort = Cohort.objects.get(id=pk)
     cohort_messages = cohort.message_set.all() # Get all the messages related to this cohort
+    
+    if request.method =='POST':
+        message = Message.objects.create(
+            user = request.user,
+            cohort = cohort,
+            body = request.POST.get('body')
+        )
+        return redirect('cohort', pk=cohort.id)
+
     context = {'cohort': cohort, 'cohort_messages':cohort_messages}
     return render(request, 'app/cohort.html', context)
+
+
 
 @login_required(login_url='login')
 def createCohort(request):

@@ -10,12 +10,22 @@
 
     {% for message in cohort_messages %}
     <div>
-        <small>@{{message.user}}  {{message.created|timesince}} ago</small>
+        <small>@{{message.user}} {{message.created|timesince}} ago</small>
         <hr>
         <p>{{message.body}}</p>
-    
+
     </div>
     {% endfor %}
 </div>
+
+
+{% if request.user.is_authenticated %}
+<div class="comment-form">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="body" placeholder="Type your message here..." />
+    </form>
+</div>
+{% endif %}
 
 {% endblock %}
