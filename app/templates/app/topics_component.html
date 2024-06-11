@@ -1,24 +1,16 @@
 <div class="topics">
     <div class="topics__header">
-      <h2>Browse Topics</h2>
+        <h2>Search from Topics</h2>
     </div>
     <ul class="topics__list">
-      <li>
-        <a href="{% url 'home' %}" class="active">All <span>{{topics.count}}</span></a>
-      </li>
-
-      {% for topic in topics %}
-      <li>
-        <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}<span>{{topic.cohort_set.all.count}}</span></a>
-      </li>
-      {% endfor %}
+        <li>
+            <a href="{% url 'home' %}" class="active">All <span>{{ cohorts.count }}</span></a>
+        </li>
+        {% for topic in topics %}
+        <li>
+            <a href="{% url 'home' %}?q={{ topic.name }}">{{ topic.name }}<span>{{ topic.cohort_set.all.count }}</span></a>
+        </li>
+        {% endfor %}
     </ul>
-  </div>
-
-
-
-
-<div>
-    <a href=></a>
 </div>
 

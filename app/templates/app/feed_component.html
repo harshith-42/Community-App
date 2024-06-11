@@ -1,14 +1,20 @@
-<div>
+<div class="cohort-list">
     {% for cohort in cohorts %}
-    <div>
-        {% if request.user == cohort.host %}
-        <a href="{% url 'update-cohort' cohort.id %}">Edit</a>
-        <a href="{% url 'delete-cohort' cohort.id %}">Delete</a>
-        {% endif %}
-        <a href="{% url 'user-profile' cohort.host.id %}">@{{cohort.host.username}}</a>
-        <h3><a href="{% url 'cohort' cohort.id %}">{{cohort.name}}</a></h3>
-        <small>{{cohort.topic.name}}</small>
-        <hr>
+    <div class="cohort-item">
+        <div class="cohort-info">
+            <div class="cohort-header">
+                <a href="{% url 'user-profile' cohort.host.id %}" class="host">@{{ cohort.host.username }}</a>
+                {% if request.user == cohort.host %}
+                <div class="cohort-actions">
+                    <a href="{% url 'update-cohort' cohort.id %}" class="edit-btn">Edit</a>
+                    <a href="{% url 'delete-cohort' cohort.id %}" class="delete-btn">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+            <h3 class="cohort-name"><a href="{% url 'cohort' cohort.id %}">{{ cohort.name }}</a></h3>
+            <small class="topic-name">{{ cohort.topic.name }}</small>
+        </div>
+        <hr class="divider">
     </div>
     {% endfor %}
 </div>

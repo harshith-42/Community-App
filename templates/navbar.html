@@ -1,15 +1,26 @@
-<a href="/">
-    <h1>Community</h1>
-</a>
+{% load static %}
+<div class="header">
+    <div class="header-left">
+        <a href="/">
+            <img src="{% static 'images/logo.png' %}" height="100px" width="100px">
+            <h2>COMMUNITY</h2>
+        </a>
+    </div>
 
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search Cohorts..."/>
-</form>
+    <div class="search-bar">
+        <form method="GET" action="{% url 'home' %}">
+            <input type="text" name="q" placeholder="Search Cohorts..." />
+        </form>
+    </div>
 
-{% if request.user.is_authenticated %}
-<h3>Hello {{request.user}},</h3>
-<a href="{% url 'logout' %}">Logout</a>
-{% else %}
-<a href="{% url 'login' %}">Login</a>
-{% endif %}
+    <div class="auth-links">
+        {% if request.user.is_authenticated %}
+        <span>Hello {{ request.user }},</span>
+        <a href="{% url 'logout' %}">Logout</a>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+</div>
 <hr>
+
