@@ -72,16 +72,17 @@ def home(request):
 def cohort(request, pk):
     cohort = Cohort.objects.get(id=pk)
     cohort_messages = cohort.message_set.all() # Get all the messages related to this cohort
-    
+    participants = cohort.participants.all()
     if request.method =='POST':
         message = Message.objects.create(
             user = request.user,
             cohort = cohort,
             body = request.POST.get('body')
         )
+        cohort.participants.add(request.user) # To add user to participants list
         return redirect('cohort', pk=cohort.id)
 
-    context = {'cohort': cohort, 'cohort_messages':cohort_messages}
+    context = {'cohort': cohort, 'cohort_messages':cohort_messages, 'participants':participants}
     return render(request, 'app/cohort.html', context)
 
 

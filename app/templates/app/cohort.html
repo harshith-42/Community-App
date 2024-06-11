@@ -1,31 +1,53 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<h1>{{cohort.name}}</h1>
-<p>{{cohort.description}}</p>
+<style>
+    .cohort-container {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+</style>
+<div class="cohort-container">
 
-<div class="comment-wrapper">
-    <h3>Conversations</h3>
-    <hr>
-
-    {% for message in cohort_messages %}
     <div>
-        <small>@{{message.user}} {{message.created|timesince}} ago</small>
+        <h1>{{cohort.name}}</h1>
+        <p>{{cohort.description}}</p>
+
+        <div class="comment-wrapper">
+            <h3>Conversations</h3>
+            <hr>
+
+            {% for message in cohort_messages %}
+            <div>
+                <small>@{{message.user}} {{message.created|timesince}} ago</small>
+                <hr>
+                <p>{{message.body}}</p>
+
+            </div>
+            {% endfor %}
+        </div>
+
+
+        {% if request.user.is_authenticated %}
+        <div class="comment-form">
+            <form method="POST" action="">
+                {% csrf_token %}
+                <input type="text" name="body" placeholder="Type your message here..." />
+            </form>
+        </div>
+        {% endif %}
+    </div>
+    <div>
+        <h3>Participants</h3>
         <hr>
-        <p>{{message.body}}</p>
+
+        {% for user in participants %}
+        <div>
+            <p>@{{user.username}}</p>
+        </div>
+        {% endfor %}
 
     </div>
-    {% endfor %}
 </div>
-
-
-{% if request.user.is_authenticated %}
-<div class="comment-form">
-    <form method="POST" action="">
-        {% csrf_token %}
-        <input type="text" name="body" placeholder="Type your message here..." />
-    </form>
-</div>
-{% endif %}
 
 {% endblock %}

@@ -16,7 +16,7 @@ class Cohort(models.Model):
     topic = models.ForeignKey(Topic, on_delete=models.SET_NULL, null=True)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True) # null ->can be empty, blank-> In form also
-    # partcipants =
+    participants = models.ManyToManyField(User, related_name='participants', blank=True)
     updated = models.DateTimeField(auto_now=True) # everytime I change, time is updated
     created = models.DateTimeField(auto_now_add=True) # Only once the time is updated i.e when created
 
