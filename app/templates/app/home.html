@@ -11,39 +11,14 @@
 
 <div class="home-container">
     <div>
-        <h3>Browse Topics</h3>
-        <hr>
-        <div>
-            <a href="{% url 'home' %}">All</a>
-        </div>
-        {% for topic in topics %}
-
-        <div>
-            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
-        </div>
-
-        {% endfor %}
+       {% include 'app/topics_component.html' %}
     </div>
 
     <div>
         <h5>{{cohort_count}} cohorts available</h5>
         <a href="{% url 'create-cohort' %}">Create Cohort</a>
         <hr>
-        <div>
-            {% for cohort in cohorts %}
-            <div>
-                {% if request.user == cohort.host %}
-                <a href="{% url 'update-cohort' cohort.id %}">Edit</a>
-                <a href="{% url 'delete-cohort' cohort.id %}">Delete</a>
-                {% endif %}
-                <span>@{{cohort.host.username}}</span>
-                <h5>{{cohort.id}} -- <a href="{% url 'cohort' cohort.id %}">{{cohort.name}}</a></h5>
-                <small>{{cohort.topic.name}}</small>
-                <hr>
-            </div>
-            {% endfor %}
-        </div>
-
+        {% include 'app/feed_component.html' %}
     </div>
 </div>
 {% endblock content %}

@@ -1,0 +1,14 @@
+<div>
+    {% for cohort in cohorts %}
+    <div>
+        {% if request.user == cohort.host %}
+        <a href="{% url 'update-cohort' cohort.id %}">Edit</a>
+        <a href="{% url 'delete-cohort' cohort.id %}">Delete</a>
+        {% endif %}
+        <a href="{% url 'user-profile' cohort.host.id %}">@{{cohort.host.username}}</a>
+        <h3><a href="{% url 'cohort' cohort.id %}">{{cohort.name}}</a></h3>
+        <small>{{cohort.topic.name}}</small>
+        <hr>
+    </div>
+    {% endfor %}
+</div>

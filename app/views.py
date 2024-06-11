@@ -94,11 +94,22 @@ def createCohort(request):
     if request.method == 'POST':
         form = CohortForm(request.POST)
         if form.is_valid():
+            cohort = form.save(commit=False)
+            cohort.host = request.user
+            cohort.save()
             form.save()
             return redirect('home')
 
     context = {'form': form}
     return render(request, 'app/cohort_form.html', context)
+
+
+def userProfile(request, pk):
+    user = User.objects.get(id=pk)
+    cohorts = user.cohort_set.all()
+    topics = Topic.objects.all()
+    context = {'user': user, 'cohorts': cohorts, 'topics': topics}
+    return render(request, 'app/profile.html', context)
 
 
 @login_required(login_url='login')
@@ -143,3 +154,4 @@ def deleteMessage(request, pk):
         message.delete()
         return redirect('home')
     return render(request, 'app/delete.html', {'obj': message})
+

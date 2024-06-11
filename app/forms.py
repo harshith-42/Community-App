@@ -7,3 +7,4 @@ class CohortForm(ModelForm):
     class Meta:
         model = Cohort
         fields = '__all__'
+        exclude = ['host', 'participants']

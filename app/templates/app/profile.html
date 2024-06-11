@@ -1,0 +1,17 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+
+
+<h1>{{user.username}}</h1>
+<p>{{user.description}}</p>
+
+<div class="profile-container">
+
+    <div>
+        {% include 'app/feed_component.html' %}
+    </div>
+</div>
+
+{% endblock content %}
