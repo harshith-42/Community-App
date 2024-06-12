@@ -1,55 +1,42 @@
 {% extends 'main.html' %}
 
 {% block content %}
-<style>
-    .cohort-container {
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-    }
-</style>
 <div class="cohort-container">
-
-    <div>
-        <h1>{{cohort.name}}</h1>
-        <p>{{cohort.description}}</p>
+    <div class="chat-room">
+        <h1>{{ cohort.name }}</h1>
+        <p>{{ cohort.description }}</p>
 
         <div class="comment-wrapper">
             <h3>Conversations</h3>
-            <hr>
 
             {% for message in cohort_messages %}
-            <div>
+            <div class="message">
                 {% if request.user == message.user %}
-                <a href="{%  url 'delete-message' message.id %}">Delete</a>
+                <a href="{% url 'delete-message' message.id %}" class="delete-message-btn">Delete</a>
                 {% endif %}
-                <small>@{{message.user}} {{message.created|timesince}} ago</small>
-                <hr>
-                <p>{{message.body}}</p>
-
+                <small>@{{ message.user }} {{ message.created|timesince }} ago</small>
+                <p>{{ message.body }}</p>
             </div>
             {% endfor %}
-        </div>
 
-
-        {% if request.user.is_authenticated %}
-        <div class="comment-form">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <input type="text" name="body" placeholder="Type your message here..." />
-            </form>
+            {% if request.user.is_authenticated %}
+            <div class="comment-form">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="body" placeholder="Type your message here..." />
+                </form>
+            </div>
+            {% endif %}
         </div>
-        {% endif %}
     </div>
-    <div>
-        <h3>Participants</h3>
-        <hr>
 
+    <div class="participants-sidebar">
+        <h3>Participants</h3>
         {% for user in participants %}
-        <div>
-            <p>@{{user.username}}</p>
+        <div class="participant">
+            <p>@{{ user.username }}</p>
         </div>
         {% endfor %}
-
     </div>
 </div>
 

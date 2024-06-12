@@ -10,6 +10,11 @@ class Topic(models.Model):
     def __str__(self):
         return self.name
 
+class Visibility(models.Model):
+    mode = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.mode
 
 class Cohort(models.Model):
     host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
@@ -19,6 +24,7 @@ class Cohort(models.Model):
     participants = models.ManyToManyField(User, related_name='participants', blank=True)
     updated = models.DateTimeField(auto_now=True) # everytime I change, time is updated
     created = models.DateTimeField(auto_now_add=True) # Only once the time is updated i.e when created
+    visibility = models.ForeignKey(Visibility, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         ordering = ['-updated', '-created'] # TO order the contents while displaying

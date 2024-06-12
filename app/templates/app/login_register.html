@@ -1,34 +1,28 @@
 {% extends 'main.html' %}
 
-{%  block content %}
+{% block content %}
 
-{% if page == 'login' %}
-<div>
-    <form method="Post" action="">
-        {% csrf_token%}
-        <label>Username:</label>
-        <input type="text" name="username" placeholder="Enter Username"/>
+<div class="form-container">
+    {% if page == 'login' %}
+    <form method="post" action="">
+        {% csrf_token %}
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter Username" />
 
-        <label>Password:</label>
-        <input type="password" name="password" placeholder="Enter Password"/>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" />
 
-        <input type="submit" value="Login"/>
+        <input type="submit" value="Login" />
     </form>
 
-    <p>Don't have an account? Create one</p>
-    <a href="{% url 'register' %}">Sign up</a>
-</div>
-
-{% else %}
-<div>
-    <form method="Post" action="">
-        {% csrf_token%}
-{{form.as_p}}
-        <input type="submit" value="Register"/>
+    <p>Don't have an account? <a href="{% url 'register' %}">Create one</a></p>
+    {% else %}
+    <form method="post" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Register" />
     </form>
-    <p>Already have an account?</p>
-    <a href="{% url 'login' %}">Sign in</a>
+    <p>Already have an account? <a href="{% url 'login' %}">Sign in</a></p>
+    {% endif %}
 </div>
-{% endif %}
-
-{%  endblock content %}
+{% endblock content %}
