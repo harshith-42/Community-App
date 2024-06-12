@@ -1,8 +1,7 @@
 """A model form is a class based representation of a form"""
 
 from django.forms import ModelForm
-from .models import Cohort
-from django.contrib.auth.models import User
+from .models import Cohort, User
 
 class CohortForm(ModelForm):
     class Meta:

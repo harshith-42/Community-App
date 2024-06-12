@@ -3,10 +3,9 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
-from .models import Cohort, Topic, Message
+from .models import Cohort, Topic, Message, User
 from .forms import CohortForm, UserForm
 
 
