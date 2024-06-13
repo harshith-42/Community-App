@@ -1,0 +1,145 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Cohort List Styles */
+.cohort-list {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.cohort-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.cohort-item:last-child {
+    border-bottom: none;
+}
+
+.cohort-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cohort-actions a {
+    margin-left: 10px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.edit-btn {
+    background-color: #4CAF50;
+}
+
+.edit-btn:hover {
+    background-color: #45a049;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+.cohort-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.host {
+    font-size: 14px;
+    color: #555;
+    text-decoration: none;
+    margin-bottom: 5px;
+}
+
+.host:hover {
+    text-decoration: underline;
+}
+
+.cohort-name {
+    font-size: 20px;
+    margin: 0;
+}
+
+.cohort-name a {
+    text-decoration: none;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.cohort-name a:hover {
+    color: #4CAF50;
+}
+
+.topic-name {
+    font-size: 12px;
+    color: #999;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .cohort-list {
+        padding: 10px;
+    }
+    
+    .cohort-item {
+        padding: 10px 0;
+    }
+
+    .cohort-actions a {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .host {
+        font-size: 12px;
+    }
+
+    .cohort-name {
+        font-size: 18px;
+    }
+
+    .topic-name {
+        font-size: 10px;
+    }
+}
+
+.host-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.cohort-header {
+    display: flex;
+    align-items: center;
+}

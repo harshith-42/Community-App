@@ -1,0 +1,55 @@
+.parent-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.home-container {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-section h5 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.create-cohort-btn {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4CAF50;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.create-cohort-btn:hover {
+    background-color: #45a049;
+}
+
+.header-section hr {
+    border: 0;
+    height: 1px;
+    background: #ddd;
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    .home-container {
+        display: grid;
+        grid-template-columns: 0fr 1fr;
+    }
+}

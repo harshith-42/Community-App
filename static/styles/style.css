@@ -1,0 +1,168 @@
+.body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #4CAF50;
+  color: white;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-left a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+}
+
+.header-left img {
+  margin-right: 10px;
+}
+
+.header-left h2 {
+  margin: 0;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.search-bar input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+}
+
+.auth-links span {
+  margin-right: 10px;
+}
+
+.auth-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.auth-links a:not(:last-child) {
+  margin-right: 20px;
+  /* Increase the gap */
+}
+
+.auth-links a:hover {
+  text-decoration: underline;
+}
+
+.profile-picture {
+  display: flex;
+  align-items: center;
+}
+
+.profile-picture img {
+  width: 40px;
+  /* Adjust as needed */
+  height: 40px;
+  /* Adjust as needed */
+  border-radius: 50%;
+  /* Make it round */
+  margin-left: 10px;
+  /* Adjust spacing */
+}
+
+@media (max-width: 768px) {
+  .logo {
+      width: 50px;
+      height: 50px;
+  }
+
+  .header-left h2 {
+    font-size: 12px;
+  }
+
+  .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+  }
+
+  .header-left {
+      flex: 1;
+      display: flex;
+      align-items: center;
+  }
+
+  .header-left img {
+      margin-right: 10px;
+  }
+
+  .search-bar {
+      flex: 1;
+      display: none;
+  }
+
+  .auth-links {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+  }
+
+  .auth-links a {
+      display: flex;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+  }
+
+  .auth-links a:hover {
+      text-decoration: underline;
+  }
+
+  .profile-picture {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+  }
+
+  .profile-picture img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-left: 5px;
+  }
+}

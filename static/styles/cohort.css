@@ -1,0 +1,131 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.cohort-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 20px;
+}
+
+.chat-room {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat-room h1 {
+    margin-top: 0;
+}
+
+.comment-wrapper {
+    margin-top: 20px;
+}
+
+.comment-wrapper h3 {
+    margin-top: 0;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.message img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message small {
+    color: #999;
+    margin-right: 10px;
+}
+
+.delete-message-btn {
+    color: #f44336;
+    margin-left: auto;
+}
+
+.delete-message-btn:hover {
+    text-decoration: underline;
+}
+
+.message p {
+    margin: 5px 0;
+    padding-left: 40px; /* Indent message body to align with the start of the username */
+}
+
+.comment-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+}
+
+.participants-sidebar {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.participants-sidebar h3 {
+    margin-top: 0;
+}
+
+.participants-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.participant-card {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.3s ease;
+}
+
+.participant-card:hover {
+    background-color: #f1f1f1;
+}
+
+.participant-card img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.participant-card span {
+    font-weight: bold;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .cohort-container {
+        display: block;
+    }
+
+    .participants-sidebar {
+        margin-top: 20px;
+    }
+}
