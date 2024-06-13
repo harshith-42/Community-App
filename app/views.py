@@ -4,9 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm
 from .models import Cohort, Topic, Message, User
-from .forms import CohortForm, UserForm
+from .forms import CohortForm, UserForm, CustomUserCreationForm
 
 
 def loginPage(request):
@@ -39,10 +38,10 @@ def logoutUser(request):
     return redirect('home')
 
 def registerPage(request):
-    form = UserCreationForm()
+    form = CustomUserCreationForm()
 
-    if request.method =='POST':
-        form = UserCreationForm(request.POST)
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, request.FILES)
         if form.is_valid():
             user = form.save(commit=False)
             user.username = user.username.lower()
@@ -50,8 +49,9 @@ def registerPage(request):
             login(request, user)
             return redirect('home')
         else:
-            messages.error(request, 'An error occured during registration')
-    return render(request, 'app/login_register.html', {'form':form})
+            messages.error(request, 'An error occurred during registration')
+    return render(request, 'app/login_register.html', {'form': form})
+
 
 def home(request):
     q = request.GET.get('q') if request.GET.get('q') != None else ''
@@ -80,7 +80,6 @@ def cohort(request, pk):
         )
         cohort.participants.add(request.user) # To add user to participants list
         return redirect('cohort', pk=cohort.id)
-
     context = {'cohort': cohort, 'cohort_messages':cohort_messages, 'participants':participants}
     return render(request, 'app/cohort.html', context)
 
@@ -160,7 +159,7 @@ def updateUser(request):
     form = UserForm(instance=user)
 
     if request.method == 'POST':
-        form = UserForm(request.POST, instance=user)
+        form = UserForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()
             return redirect('user-profile', pk=user.id)

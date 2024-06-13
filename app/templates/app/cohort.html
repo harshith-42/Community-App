@@ -11,10 +11,13 @@
 
             {% for message in cohort_messages %}
             <div class="message">
-                {% if request.user == message.user %}
-                <a href="{% url 'delete-message' message.id %}" class="delete-message-btn">Delete</a>
-                {% endif %}
-                <small>@{{ message.user }} {{ message.created|timesince }} ago</small>
+                <div class="message-header">
+                    <img src="{{ message.user.avatar.url }}" alt="User Avatar" />
+                    <small>@{{ message.user }} {{ message.created|timesince }} ago</small>
+                    {% if request.user == message.user %}
+                    <a href="{% url 'delete-message' message.id %}" class="delete-message-btn">Delete</a>
+                    {% endif %}
+                </div>
                 <p>{{ message.body }}</p>
             </div>
             {% endfor %}
@@ -32,13 +35,16 @@
 
     <div class="participants-sidebar">
         <h3>Participants</h3>
-        {% for user in participants %}
-        <div class="participant">
-            <p>@{{ user.username }}</p>
+        <div class="participants-list">
+            {% for user in participants %}
+            <div class="participant-card">
+                <a href="{% url 'user-profile' user.id %}">
+                    <img src="{{ user.avatar.url }}" alt="{{ user.username }}'s avatar" />
+                    <span>@{{ user.username }}</span>
+                </a>
+            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
-
 {% endblock %}
-<a href="{% url 'user-profile' cohort.host.id %}" class="host">@{{ cohort.host.username }}</a>

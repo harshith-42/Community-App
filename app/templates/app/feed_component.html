@@ -3,6 +3,7 @@
     <div class="cohort-item">
         <div class="cohort-info">
             <div class="cohort-header">
+                <img src="{{cohort.host.avatar.url}}" class="host-avatar"/>
                 <a href="{% url 'user-profile' cohort.host.id %}" class="host">@{{ cohort.host.username }}</a>
                 {% if request.user == cohort.host %}
                 <div class="cohort-actions">
