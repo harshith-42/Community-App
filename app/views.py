@@ -1,10 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate, login, logout
-from .models import Cohort, Topic, Message, User
+from .models import Cohort, Topic, Message, User, Follow
 from .forms import CohortForm, UserForm, CustomUserCreationForm
 
 
@@ -67,7 +67,7 @@ def home(request):
     context = {'cohorts': cohorts, 'topics': topics, 'cohort_count':cohort_count}
     return render(request, 'app/home.html', context)
 
-
+@login_required(login_url='login')
 def cohort(request, pk):
     cohort = Cohort.objects.get(id=pk)
     cohort_messages = cohort.message_set.all() # Get all the messages related to this cohort
@@ -101,12 +101,13 @@ def createCohort(request):
     context = {'form': form}
     return render(request, 'app/cohort_form.html', context)
 
-
+@login_required(login_url='login')
 def userProfile(request, pk):
-    user = User.objects.get(id=pk)
+    user = get_object_or_404(User, id=pk)
     cohorts = user.cohort_set.all()
     topics = Topic.objects.all()
-    context = {'user': user, 'cohorts': cohorts, 'topics': topics}
+    is_following = Follow.objects.filter(from_user=request.user, to_user=user).exists() if request.user.is_authenticated else False
+    context = {'user': user, 'cohorts': cohorts, 'topics': topics, 'is_following': is_following}
     return render(request, 'app/profile.html', context)
 
 
@@ -164,3 +165,30 @@ def updateUser(request):
             form.save()
             return redirect('user-profile', pk=user.id)
     return render(request, 'app/update_user.html', {'form': form})
+
+
+def toggle_follow(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id')
+        action = request.POST.get('action')
+        to_user = get_object_or_404(User, id=user_id)
+
+        if action == 'follow':
+            Follow.objects.get_or_create(from_user=request.user, to_user=to_user)
+        elif action == 'unfollow':
+            Follow.objects.filter(from_user=request.user, to_user=to_user).delete()
+
+        return redirect('user-profile', pk=to_user.id)  # Use 'pk' here
+    return redirect('home')
+
+def followers_list(request, pk):
+    user = get_object_or_404(User, id=pk)
+    followers = Follow.objects.filter(to_user=user).select_related('from_user')
+    context = {'user': user, 'followers': followers}
+    return render(request, 'app/followers_list.html', context)
+
+def following_list(request, pk):
+    user = get_object_or_404(User, id=pk)
+    following = Follow.objects.filter(from_user=user).select_related('to_user')
+    context = {'user': user, 'following': following}
+    return render(request, 'app/following_list.html', context)

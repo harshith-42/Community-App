@@ -5,15 +5,33 @@
 
 
 <div class="user-profile">
-    <h1 class="username">{{ user.username }}</h1>
-    {% if request.user == user %}
-    <a href="{% url 'update-user' %}" class="update-profile">Update Profile</a>
-    {% endif %}
-    <h4 class="bio">{{ user.bio }}</h4>
+    <h1 class="username">{{ user.username|upper }}</h1>
+    <span class="user-since">Community Member since<br>{{ user.date_joined|date:"d-m-Y" }}</span>
+    <h4 class="bio">"{{ user.bio }}"</h4>
     <div class="avatar-container">
         <img src="{{ user.avatar.url }}" class="user-avatar" alt="User Avatar"/>
     </div>
+
+    {% if request.user == user %}
+    <a href="{% url 'update-user' %}" class="update-profile">Update Profile</a>
+    {% endif %}
+
+    {% if user != request.user %}
+    <form method="post" action="{% url 'toggle-follow' %}">
+        {% csrf_token %}
+        <input type="hidden" name="user_id" value="{{ user.id }}">
+        {% if is_following %}
+        <button type="submit" name="action" value="unfollow" class="btn btn-follow">Unfollow</button>
+        {% else %}
+        <button type="submit" name="action" value="follow" class="btn btn-follow">Follow</button>
+        {% endif %}
+    </form>
+    {% else %}
+    <a class="btn btn-follow" href="{% url 'followers-list' user.id %}">Followers</a>
+    <a class="btn btn-follow" href="{% url 'following-list' user.id %}">Following</a>
+    {% endif %}
 </div>
+
 
 <div class="profile-container">
 

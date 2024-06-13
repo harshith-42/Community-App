@@ -1,6 +1,13 @@
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{form.as_p}}
-    <input type="submit" value="Submit" />
+{% extends 'main.html' %}
 
-</form>
+{% block content %}
+
+<div class="form-container">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit" />
+
+    </form>
+</div>
+{% endblock content %}

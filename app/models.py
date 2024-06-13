@@ -50,4 +50,9 @@ class Message(models.Model):
     def __str__(self):
         return self.body[0:50]
 
+class Follow(models.Model):
+    from_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='follower')
+    to_user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='followed')
+    
+
 

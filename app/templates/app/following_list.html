@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+<div class="follow-list">
+  <h1>Following {{following|length}}</h1>
+  {% for follow in following %}
+  <div class="follow-card">
+    <a href="{% url 'user-profile' follow.to_user.id %}" class="follow-link">
+      <img src="{{ follow.to_user.avatar.url }}" class="avatar" alt="{{ follow.to_user.username }}'s avatar" />
+      <span class="username">{{ follow.to_user.username }}</span>
+    </a>
+  </div>
+  {% endfor %}
+  <a href="{% url 'user-profile' user.id %}" class="back-to-profile">Back to Profile</a>
+</div>
+
+{% endblock %}
